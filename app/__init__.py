@@ -1,0 +1,1 @@
+"""OpenAI coding assistant application."""

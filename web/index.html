@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b0d10" />
+    <title>Code Studio</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">&lt;/&gt;</div>
+          <div>
+            <strong>Code Studio</strong>
+            <span>AI workspace</span>
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <div class="section-heading">
+            <span>Projektkontext</span>
+            <button id="refreshFiles" class="icon-button" type="button" title="Dateien aktualisieren" aria-label="Dateien aktualisieren">↻</button>
+          </div>
+          <div class="search-wrap">
+            <span aria-hidden="true">⌕</span>
+            <input id="fileSearch" type="search" placeholder="Dateien suchen" />
+          </div>
+          <div id="fileList" class="file-list"></div>
+        </div>
+
+        <div class="sidebar-footer">
+          <label for="apiKey">API-Key</label>
+          <div class="key-wrap">
+            <input id="apiKey" type="password" autocomplete="off" placeholder="APP_API_KEY" />
+            <button id="toggleKey" class="icon-button" type="button" title="Schlüssel anzeigen">◉</button>
+          </div>
+        </div>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <div>
+            <span class="eyebrow">WORKSPACE</span>
+            <h1 id="workspaceTitle">Projekt-Assistent</h1>
+          </div>
+          <div class="topbar-actions">
+            <span id="connectionStatus" class="status"><i></i> Verbunden</span>
+            <button id="clearChat" class="secondary-button" type="button">Neuer Chat</button>
+          </div>
+        </header>
+
+        <section class="content">
+          <div class="chat-column">
+            <div id="messages" class="messages" aria-live="polite"></div>
+            <div class="composer-wrap">
+              <div id="contextChips" class="context-chips"></div>
+              <form id="chatForm" class="composer">
+                <textarea id="prompt" rows="1" placeholder="Beschreibe deine Aufgabe..." required></textarea>
+                <button id="sendButton" type="submit" aria-label="Nachricht senden">
+                  <span>Senden</span>
+                  <b>↗</b>
+                </button>
+              </form>
+              <div class="composer-meta">
+                <span id="selectedCount">0 Dateien ausgewählt</span>
+                <span>Enter zum Senden · Umschalt+Enter für neue Zeile</span>
+              </div>
+            </div>
+          </div>
+
+          <aside class="preview-column">
+            <div class="preview-header">
+              <div>
+                <span>DATEI</span>
+                <strong id="previewTitle">Keine Vorschau</strong>
+              </div>
+              <button id="closePreview" class="icon-button" type="button" aria-label="Vorschau schließen">×</button>
+            </div>
+            <pre id="filePreview" class="file-preview"><code>Wähle eine Projektdatei aus.</code></pre>
+          </aside>
+        </section>
+      </main>
+    </div>
+    <div id="toastRegion" class="toast-region" aria-live="polite"></div>
+    <script src="/app.js"></script>
+  </body>
+</html>

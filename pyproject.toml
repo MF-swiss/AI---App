@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "openai-code-assistant"
+version = "0.1.0"
+description = "FastAPI service for coding conversations with OpenAI"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.115,<1",
+  "uvicorn[standard]>=0.34,<1",
+  "openai>=1.60,<2",
+  "pydantic-settings>=2.7,<3",
+  "python-dotenv>=1.0,<2",
+]
+
+[project.optional-dependencies]
+test = [
+  "httpx>=0.28,<1",
+  "pytest>=8.3,<9",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.setuptools.packages.find]
+include = ["app*"]

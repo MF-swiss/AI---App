@@ -1,29 +1,23 @@
-# OpenAI Code Assistant
+# Lokaler Code-Assistent
 
-Ein FastAPI-Dienst, der OpenAI-Chat-Streaming mit Projektdatei-Kontext und isolierter Code-Ausführung bereitstellt.
+Ein FastAPI-Dienst mit lokaler Projektanalyse, Chat-Streaming und isolierter Code-Ausführung ohne externe API.
 
 ## Voraussetzungen
 
 - Python 3.11+
-- OpenAI API-Key
 - Docker für `/execute` (optional)
 
 ## Start
 
 ```powershell
 Copy-Item .env.example .env
-# .env mit deinem OpenAI-Key und APP_API_KEY ausfüllen
 python -m venv .venv
 .\\.venv\\Scripts\\Activate.ps1
 pip install -e ".[test]"
 uvicorn app.main:app --reload
 ```
 
-Danach `http://localhost:8000` öffnen. Dort den in `.env` konfigurierten
-`APP_API_KEY` in das Feld „API-Key“ eintragen. Der Schlüssel wird nur lokal im
-Browser (`localStorage`) gespeichert. Dort den in `.env` konfigurierten
-`APP_API_KEY` in das Feld „API-Key“ eintragen. Der Schlüssel wird nur lokal im
-Browser (`localStorage`) gespeichert.
+Danach `http://localhost:8000` öffnen. Es werden keine API-Keys benötigt.
 
 ## API
 

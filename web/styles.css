@@ -36,10 +36,6 @@ button { cursor: pointer; }
 .file-row input:checked { border-color: var(--accent); background: var(--accent); box-shadow: inset 0 0 0 3px #1a2017; }
 .file-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; }
 .file-type { color: #707783; font-size: 10px; text-align: right; }
-.sidebar-footer { padding-top: 12px; border-top: 1px solid var(--line); }
-.sidebar-footer label { display: block; margin: 0 0 7px 2px; color: var(--muted); font-size: 11px; }
-.key-wrap { display: flex; height: 38px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
-.key-wrap input { min-width: 0; flex: 1; border: 0; outline: 0; padding: 0 9px; background: transparent; color: var(--text); font-size: 12px; }
 .workspace { min-width: 0; height: 100vh; }
 .topbar { display: flex; align-items: center; justify-content: space-between; height: 74px; padding: 0 22px; border-bottom: 1px solid var(--line); }
 .eyebrow { color: var(--muted); font-size: 9px; font-weight: 800; letter-spacing: .12em; }

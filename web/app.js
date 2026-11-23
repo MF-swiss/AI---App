@@ -1,4 +1,3 @@
-const apiKeyInput = document.querySelector("#apiKey");
 const fileList = document.querySelector("#fileList");
 const fileSearch = document.querySelector("#fileSearch");
 const messages = document.querySelector("#messages");
@@ -15,11 +14,19 @@ let history = [];
 let allFiles = [];
 let busy = false;
 
-apiKeyInput.value = localStorage.getItem("codeStudioApiKey") || "";
-apiKeyInput.addEventListener("input", () => localStorage.setItem("codeStudioApiKey", apiKeyInput.value));
-
 function headers() {
-  return { "Content-Type": "application/json", "X-API-Key": apiKeyInput.value };
+  return { "Content-Type": "application/json" };
+}
+
+async function responseError(response, fallback) {
+  const text = await response.text();
+  if (!text) return fallback;
+  try {
+    const body = JSON.parse(text);
+    return body.detail || fallback;
+  } catch {
+    return text.length > 300 ? fallback : text;
+  }
 }
 
 function escapeHtml(value) {
@@ -112,8 +119,7 @@ async function previewFile(path) {
       body: JSON.stringify({ paths: [path] }),
     });
     if (!response.ok) {
-      const body = await response.json();
-      throw new Error(body.detail || "Vorschau fehlgeschlagen");
+      throw new Error(await responseError(response, "Vorschau fehlgeschlagen"));
     }
     const data = await response.json();
     filePreview.innerHTML = `<code>${escapeHtml(data.files[0].content)}</code>`;
@@ -162,8 +168,7 @@ async function sendMessage(event) {
       body: JSON.stringify({ messages: history, project_files: selectedFiles(), temperature: 0.2 }),
     });
     if (!response.ok) {
-      const body = await response.json();
-      throw new Error(body.detail || "Die Anfrage ist fehlgeschlagen");
+      throw new Error(await responseError(response, "Die Anfrage ist fehlgeschlagen"));
     }
 
     const reader = response.body.getReader();
@@ -209,9 +214,6 @@ document.querySelector("#clearChat").addEventListener("click", () => { history =
 document.querySelector("#closePreview").addEventListener("click", () => {
   previewTitle.textContent = "Keine Vorschau";
   filePreview.innerHTML = "<code>Wähle eine Projektdatei aus.</code>";
-});
-document.querySelector("#toggleKey").addEventListener("click", () => {
-  apiKeyInput.type = apiKeyInput.type === "password" ? "text" : "password";
 });
 fileSearch.addEventListener("input", renderFiles);
 prompt.addEventListener("input", resizePrompt);
